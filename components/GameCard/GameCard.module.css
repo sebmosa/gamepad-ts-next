@@ -21,5 +21,7 @@
   margin-left: 0.75rem;
   margin-bottom: 0.75rem;
   color: var(--jade-grey);
-  height: 2.813rem;
+  max-height: 1.813rem;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
 }

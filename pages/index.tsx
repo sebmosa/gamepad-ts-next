@@ -11,10 +11,10 @@ import styles from '@/styles/Home.module.css'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
+import Link from 'next/link.js'
 import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring'
-import { MouseEvent, useEffect, useState } from 'react'
+import { MouseEvent, useState } from 'react'
 import { fetchGameList } from '../api/fetchGameList'
 
 const first_page = 1
@@ -145,13 +145,13 @@ const Home = ({
   //   })
   // }
 
-  useEffect(() => {
-    router.replace(
-      `/?page=${page}${search ? `&search=${debounceSearch}` : ''}`,
-      undefined,
-      { shallow: true }
-    )
-  }, [page, search, router, debounceSearch])
+  // useEffect(() => {
+  //   router.replace(
+  //     `/?page=${page}${search ? `&search=${debounceSearch}` : ''}`,
+  //     undefined,
+  //     { shallow: true }
+  //   )
+  // }, [page, debounceSearch])
 
   return (
     <div className={styles.container}>
@@ -200,13 +200,13 @@ const Home = ({
             </Link>
           ))}
         </div>
-        <Pagination
+        {/* <Pagination
           currentPage={page}
           count={gameList?.count || 0}
           pageSize={page_size}
           onPageChange={(pageNumber) => setPage(pageNumber)}
           disabled={isLoading || isFetching}
-        />
+        /> */}
       </main>
 
       <footer className={styles.footer}>

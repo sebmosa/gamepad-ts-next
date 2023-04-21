@@ -7,11 +7,11 @@ const base: IListBox = {
   options: [
     {
       value: '4',
-      label: 'PC',
+      name: 'PC',
     },
     {
       value: '187',
-      label: 'PlayStation 5',
+      name: 'PlayStation 5',
     },
   ],
 }

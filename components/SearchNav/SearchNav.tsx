@@ -1,5 +1,5 @@
 import { ISelectFilter } from '@/types/common'
-import { MouseEvent, useEffect, useMemo } from 'react'
+import { MouseEvent, useMemo } from 'react'
 import { useGenresQuery } from '../../hooks/useGenresQuery'
 import { usePlatformsQuery } from '../../hooks/usePlatformsQuery'
 import { ListBox, SelectOption } from '../ListBox/ListBox'
@@ -74,10 +74,6 @@ export const SearchNav = ({
       value: `-` + sort,
     })),
   ]
-
-  useEffect(() => {
-    console.log('platformList', platformList)
-  }, [])
 
   return (
     <div className={styles.search_nav}>

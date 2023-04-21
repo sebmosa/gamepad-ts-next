@@ -34,7 +34,6 @@
 
 .search_bar__input:focus-visible,
 .search_bar__input_active:focus-visible {
-  outline: 0;
   background-color: var(--white);
 }
 

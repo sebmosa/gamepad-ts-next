@@ -59,8 +59,9 @@
   padding-left: 1rem;
   padding-right: 1rem;
   width: 50%;
-  background-color: var(--green-dark);
-  border: 1px solid var(--jade-grey);
+  background-color: var(--jade-darker);
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--red-grey);
 }
 
 .hero_hiw {

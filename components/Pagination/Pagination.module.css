@@ -28,9 +28,7 @@
 
 .page_list__button_active {
   font-weight: 900;
-  box-shadow: hsl(134deg 100% 64% / 10%) 0px 4px 8px -2px,
-    hsl(134deg 100% 64% / 6%) 0px 0px 0px 1px;
-  text-shadow: var(--green-light) 1px 0 10px;
+  text-shadow: var(--jade-grey) 1px 0 0.75rem;
 }
 
 .page_next img,

@@ -72,14 +72,15 @@ h6 {
   /* Colors */
   --background: hsl(120, 3%, 7%);
   --white: hsl(120, 45%, 98%);
+  --jade-faded: hsl(120, 10%, 94%);
   --jade-grey: hsl(120, 10%, 77%);
   --jade-dark: hsl(120, 1%, 36%);
   --jade-darker: hsl(120, 3%, 7%);
   --red: hsl(355, 100%, 64%);
   --red-light: hsl(355, 100%, 77%);
+  --red-grey: hsl(355, 10%, 77%);
   --red-dark: hsl(355, 50%, 35%);
   --red-darker: hsl(355, 3%, 7%);
-  --green-dark: hsl(120, 1%, 36%);
   --green-light: hsl(134, 100%, 64%);
 }
 
