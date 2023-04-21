@@ -1,0 +1,25 @@
+.container {
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cover {
+  border-radius: var(--radius);
+  margin-top: 0.75rem;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  margin-bottom: 0.5rem;
+  object-fit: cover;
+  box-shadow: hsl(134deg 100% 64% / 10%) 0px 4px 8px -2px,
+    hsl(134deg 100% 64% / 6%) 0px 0px 0px 1px;
+}
+
+.title {
+  font-size: 0.938rem;
+  display: flex;
+  max-width: 200px;
+  margin-left: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--jade-grey);
+  height: 2.813rem;
+}

@@ -1,0 +1,39 @@
+.pagination {
+  display: flex;
+  margin: 0.75rem;
+}
+
+.page_list {
+  display: flex;
+  padding-inline-start: 0;
+}
+
+.page_list__page {
+  list-style: none;
+}
+
+.page_list__button,
+.page_list__button_active,
+.page_next,
+.page_previous {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.page_list__button,
+.page_list__button_active {
+  color: var(--jade-grey);
+}
+
+.page_list__button_active {
+  font-weight: 900;
+  box-shadow: hsl(134deg 100% 64% / 10%) 0px 4px 8px -2px,
+    hsl(134deg 100% 64% / 6%) 0px 0px 0px 1px;
+  text-shadow: var(--green-light) 1px 0 10px;
+}
+
+.page_next img,
+.page_previous img {
+  fill: var(--jade-grey);
+}

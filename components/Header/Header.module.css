@@ -1,0 +1,34 @@
+.header {
+  margin: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_logo {
+  margin: 0.75rem;
+}
+
+.header_actions {
+  margin: 0.75rem;
+}
+
+.header_links {
+  display: flex;
+  list-style: none;
+}
+
+.header_link {
+  margin-right: 0.75rem;
+  color: var(--jade-grey);
+  text-decoration: none;
+}
+
+.header_link__active {
+  margin-right: 0.75rem;
+  color: var(--jade-grey);
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--red);
+}
