@@ -17,6 +17,7 @@ export const Header = () => {
             className={styles.header_logo}
             aria-label="logo gamepad"
             alt="gamepad"
+            priority
           />
         </Link>
       </h1>

@@ -47,11 +47,11 @@ export const SearchNav = ({
 
   useEffect(() => {
     setAllPLatformsCtx(allPlatforms)
-  }, [setAllPLatformsCtx, allPlatforms])
+  }, [setAllPLatformsCtx])
 
   useEffect(() => {
     setAllGenresCtx(allGenres)
-  }, [setAllGenresCtx, allGenres])
+  }, [setAllGenresCtx])
 
   const platformList: SelectOption[] = [
     { name: 'All', value: allPlatforms },
