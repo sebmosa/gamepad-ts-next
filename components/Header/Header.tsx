@@ -47,6 +47,11 @@ export const Header = () => {
               Collection
             </Link>
           </li>
+          <li>
+            <a href="" className={styles.header_link}>
+              Sign In
+            </a>
+          </li>
         </ul>
       </div>
     </header>
