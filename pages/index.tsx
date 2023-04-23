@@ -5,16 +5,17 @@ import { Header } from '@/components/Header/Header'
 import { Hero } from '@/components/Hero/Hero'
 import { Pagination } from '@/components/Pagination/Pagination'
 import { SearchNav } from '@/components/SearchNav/SearchNav'
+import { allGenresContext, allPlatformsContext } from '@/context/context'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useGameListQuery } from '@/hooks/useGameListQuery'
 import styles from '@/styles/Home.module.css'
-import { dehydrate, QueryClient } from '@tanstack/react-query'
+import { QueryClient, dehydrate } from '@tanstack/react-query'
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import Link from 'next/link.js'
 import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring'
-import { MouseEvent, useState } from 'react'
+import { MouseEvent, useContext, useState } from 'react'
 import { fetchGameList } from '../api/fetchGameList'
 
 const first_page = 1
@@ -82,6 +83,8 @@ const Home = ({
   initialPage,
   initialSearch,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { allPlatformsCtx } = useContext(allPlatformsContext)
+  const { allGenresCtx } = useContext(allGenresContext)
   const router = useRouter()
   const [page, setPage] = useState(initialPage)
   const [search, setSearch] = useState(initialSearch)
@@ -108,10 +111,8 @@ const Home = ({
 
   const handleSearch = (value: string) => {
     setSearch(value)
-    setPlatform(
-      '4,187,1,18,186,7,3,21,8,9,13,5,6,14,80,16,15,27,19,17,10,11,105,83,24,43,26,79,49,55,41,166,28,31,23,22,25,34,46,50,167,107,119,117,74,106,111,112,77,12'
-    )
-    setGenre('4,51,3,5,10,40,14,7,11,83,1,59,15,6,19,28,34,17,2')
+    setPlatform(allPlatformsCtx.toString())
+    setGenre(allGenresCtx.toString())
     setPage(first_page)
   }
 
@@ -134,6 +135,15 @@ const Home = ({
     setSort(value)
   }
 
+  const onChangePagination = (value: number) => {
+    setPage(value)
+    router.replace(
+      `/?page=${value}${search ? `&search=${debounceSearch}` : ''}`,
+      undefined,
+      { shallow: true }
+    )
+  }
+
   // const prefetchGame = async (event: MouseEvent) => {
   //   console.log('Event:', event)
   //   const gameId = event.toString()
@@ -144,14 +154,6 @@ const Home = ({
   //     staleTime: 10 * 1000,
   //   })
   // }
-
-  // useEffect(() => {
-  //   router.replace(
-  //     `/?page=${page}${search ? `&search=${debounceSearch}` : ''}`,
-  //     undefined,
-  //     { shallow: true }
-  //   )
-  // }, [page, debounceSearch])
 
   return (
     <div className={styles.container}>
@@ -181,7 +183,7 @@ const Home = ({
           currentPage={page}
           count={gameList?.count || 0}
           pageSize={page_size}
-          onPageChange={(pageNumber) => setPage(pageNumber)}
+          onPageChange={onChangePagination}
           disabled={isLoading || isFetching}
         />
         <div className={styles.list}>

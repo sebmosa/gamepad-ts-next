@@ -1,5 +1,6 @@
+import { allGenresContext, allPlatformsContext } from '@/context/context'
 import { ISelectFilter } from '@/types/common'
-import { MouseEvent, useMemo } from 'react'
+import { MouseEvent, useContext, useEffect, useMemo } from 'react'
 import { useGenresQuery } from '../../hooks/useGenresQuery'
 import { usePlatformsQuery } from '../../hooks/usePlatformsQuery'
 import { ListBox, SelectOption } from '../ListBox/ListBox'
@@ -30,6 +31,9 @@ export const SearchNav = ({
   onChangeGenre,
   onChangeSort,
 }: ISearchNav) => {
+  const { setAllPLatformsCtx } = useContext(allPlatformsContext)
+  const { setAllGenresCtx } = useContext(allGenresContext)
+
   const platforms = usePlatformsQuery()
   const genres = useGenresQuery()
 
@@ -39,8 +43,15 @@ export const SearchNav = ({
   const allPlatforms = platformsMemo.map((platform: ISelectFilter) =>
     [platform.id].join()
   )
-
   const allGenres = genresMemo.map((genre: ISelectFilter) => [genre.id].join())
+
+  useEffect(() => {
+    setAllPLatformsCtx(allPlatforms)
+  }, [setAllPLatformsCtx, allPlatforms])
+
+  useEffect(() => {
+    setAllGenresCtx(allGenres)
+  }, [setAllGenresCtx, allGenres])
 
   const platformList: SelectOption[] = [
     { name: 'All', value: allPlatforms },

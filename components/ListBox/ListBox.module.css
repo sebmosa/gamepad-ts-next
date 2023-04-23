@@ -3,6 +3,7 @@
   margin-right: 0.75rem;
   position: relative;
   width: 12rem;
+  z-index: 1;
 }
 
 .listbox_button {

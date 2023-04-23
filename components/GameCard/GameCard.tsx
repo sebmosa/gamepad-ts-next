@@ -19,7 +19,6 @@ export const GameCard = ({ title, picture }: IGameCard) => {
         width={200}
         height={252}
         quality={100}
-        priority
         sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw"

@@ -11,7 +11,7 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <h1>
-        <Link href="/">
+        <Link href="/?page=1">
           <Image
             src={logo}
             className={styles.header_logo}
@@ -25,7 +25,7 @@ export const Header = () => {
           <li>
             <Link
               className={
-                router.asPath === '/'
+                router.asPath.includes('/?page=') || router.asPath === '/'
                   ? styles.header_link__active
                   : styles.header_link
               }
