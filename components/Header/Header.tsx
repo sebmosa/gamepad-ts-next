@@ -48,7 +48,7 @@ export const Header = () => {
             </Link>
           </li>
           <li>
-            <a href="" className={styles.header_link}>
+            <a href="#" onClick={() => {}} className={styles.header_link}>
               Sign In
             </a>
           </li>

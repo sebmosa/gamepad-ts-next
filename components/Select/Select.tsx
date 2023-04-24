@@ -1,13 +1,13 @@
 import { Listbox, Transition } from '@headlessui/react'
 import Image from 'next/image.js'
-import chevronDown from '../../public/ListBox/chevron-down.svg'
-import styles from './ListBox.module.css'
+import chevronDown from '../../public/Select/chevron-down.svg'
+import styles from './Select.module.css'
 export type SelectOption = {
   name: string
   value: string
 }
 
-export interface IListBox {
+export interface ISelect {
   value?: string
   label?: string
   disabled?: boolean
@@ -15,18 +15,18 @@ export interface IListBox {
   onChange: (value: string) => void
 }
 
-export const ListBox = ({
+export const Select = ({
   value,
   label,
   disabled = false,
   options,
   onChange,
-}: IListBox) => {
+}: ISelect) => {
   return (
     <Listbox value={value} onChange={onChange} disabled={disabled}>
       <Listbox.Label>{label}</Listbox.Label>
-      <div className={styles.listbox_wrapper}>
-        <Listbox.Button className={styles.listbox_button}>
+      <div className={styles.select_wrapper}>
+        <Listbox.Button className={styles.select_button}>
           <span>
             {
               (
@@ -36,7 +36,7 @@ export const ListBox = ({
               )?.name
             }
           </span>
-          <span className={styles.listbox_button__icon}>
+          <span className={styles.select_button__icon}>
             <Image src={chevronDown} alt="select icon" aria-hidden="true" />
           </span>
         </Listbox.Button>
@@ -45,21 +45,19 @@ export const ListBox = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         ></Transition>
-        <Listbox.Options className={styles.listbox_options}>
+        <Listbox.Options className={styles.select_options}>
           {options?.map(({ value, name }) => (
             <Listbox.Option
               key={value}
               value={value}
               className={({ active }) =>
-                active ? styles.listbox_option__active : styles.listbox_option
+                active ? styles.select_option__active : styles.select_option
               }
             >
               {({ selected }) => (
                 <span
                   className={
-                    selected
-                      ? styles.listbox_name__selected
-                      : styles.listbox_name
+                    selected ? styles.select_name__selected : styles.select_name
                   }
                 >
                   {name}

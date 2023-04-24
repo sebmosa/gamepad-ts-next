@@ -1,4 +1,4 @@
-.listbox_wrapper {
+.select_wrapper {
   margin-left: 0.75rem;
   margin-right: 0.75rem;
   position: relative;
@@ -6,7 +6,7 @@
   z-index: 1;
 }
 
-.listbox_button {
+.select_button {
   position: relative;
   width: 100%;
   border: 0;
@@ -24,16 +24,16 @@
   text-align: justify;
 }
 
-.listbox_button:focus-visible {
+.select_button:focus-visible {
   outline: 0;
 }
 
-.listbox_button__icon {
+.select_button__icon {
   position: absolute;
   right: 0.5rem;
 }
 
-.listbox_options {
+.select_options {
   width: 100%;
   position: absolute;
   top: 2.75rem;
@@ -46,13 +46,13 @@
   cursor: pointer;
 }
 
-.listbox_option__active {
+.select_option__active {
   background-color: var(--jade-grey);
   color: var(--jade-darker);
 }
 
-.listbox_option__active,
-.listbox_option {
+.select_option__active,
+.select_option {
   padding-top: 0.25rem;
   padding-right: 1rem;
   padding-bottom: 0.25rem;
@@ -60,12 +60,12 @@
   text-transform: capitalize;
 }
 
-.listbox_option__active:first-child {
+.select_option__active:first-child {
   border-top-left-radius: var(--radius);
   border-top-right-radius: var(--radius);
 }
 
-.listbox_option__active:last-child {
+.select_option__active:last-child {
   border-bottom-left-radius: var(--radius);
   border-bottom-right-radius: var(--radius);
 }

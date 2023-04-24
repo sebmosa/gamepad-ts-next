@@ -1,4 +1,4 @@
-import { Transition } from '@headlessui/react'
+import { Dialog, Transition } from '@headlessui/react'
 import {
   Component,
   Fragment,
@@ -6,17 +6,17 @@ import {
   ReactNode,
   useState,
 } from 'react'
-import styles from './Dialog.module.css'
-export interface IDialog {
+import styles from './Modal.module.css'
+export interface IModal {
   as: string | Component
   className?: string
   open: boolean
-  initialFocus?: MutableRefObject<HTMLDivElement>
+  initialFocus?: MutableRefObject<null>
   children?: ReactNode
   onClose: (d: false) => void
 }
 
-export const Dialog = ({ open, onClose, children, initialFocus }: IDialog) => {
+export const Modal = ({ open, onClose, children, initialFocus }: IModal) => {
   const [isOpen, setIsOpen] = useState(open)
 
   return (
@@ -44,9 +44,11 @@ export const Dialog = ({ open, onClose, children, initialFocus }: IDialog) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           ></Transition.Child>
-          <span className={styles.dialog__centering} aria-hidden="true">
+
+          <span className={styles.modal__centering} aria-hidden="true">
             &#8203;
           </span>
+
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -56,10 +58,13 @@ export const Dialog = ({ open, onClose, children, initialFocus }: IDialog) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            {children}
+            <Dialog.Panel>{children}</Dialog.Panel>
           </Transition.Child>
         </Dialog>
       </Transition>
     </div>
   )
 }
+
+Modal.Title = Dialog.Title
+Modal.Description = Dialog.Description

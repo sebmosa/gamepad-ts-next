@@ -1,6 +1,6 @@
-import { IListBox } from './ListBox'
+import { ISelect } from './Select'
 
-const base: IListBox = {
+const base: ISelect = {
   label: 'Platforms',
   value: 'All',
   onChange: () => {},
@@ -16,6 +16,6 @@ const base: IListBox = {
   ],
 }
 
-export const mockListBoxProps = {
+export const mockSelectProps = {
   base,
 }

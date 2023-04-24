@@ -3,8 +3,8 @@ import { ISelectFilter } from '@/types/common'
 import { MouseEvent, useContext, useEffect, useMemo } from 'react'
 import { useGenresQuery } from '../../hooks/useGenresQuery'
 import { usePlatformsQuery } from '../../hooks/usePlatformsQuery'
-import { ListBox, SelectOption } from '../ListBox/ListBox'
 import { SearchBar } from '../SearchBar/SearchBar'
+import { Select, SelectOption } from '../Select/Select'
 import styles from './SearchNav.module.css'
 export interface ISearchNav {
   placeholder: string
@@ -97,14 +97,14 @@ export const SearchNav = ({
 
       {search?.length > 0 && (
         <>
-          <ListBox
+          <Select
             options={platformList}
             value={platform}
             onChange={onChangePlatform}
             label="Platforms"
           />
 
-          <ListBox
+          <Select
             options={genreList}
             value={genre}
             onChange={onChangeGenre}
@@ -112,7 +112,7 @@ export const SearchNav = ({
           />
         </>
       )}
-      <ListBox
+      <Select
         options={sortList}
         value={sort}
         onChange={onChangeSort}

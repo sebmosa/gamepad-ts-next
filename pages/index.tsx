@@ -202,13 +202,6 @@ const Home = ({
             </Link>
           ))}
         </div>
-        {/* <Pagination
-          currentPage={page}
-          count={gameList?.count || 0}
-          pageSize={page_size}
-          onPageChange={(pageNumber) => setPage(pageNumber)}
-          disabled={isLoading || isFetching}
-        /> */}
       </main>
 
       <footer className={styles.footer}>
