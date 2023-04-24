@@ -1,7 +1,8 @@
 import { ISignIn } from './SignIn'
 
 const base: ISignIn = {
-  sampleTextProp: 'Hello world!',
+  open: true,
+  onClose: () => {},
 }
 
 export const mockSignInProps = {
