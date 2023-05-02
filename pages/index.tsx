@@ -1,19 +1,24 @@
+import { fetchCollection } from '@/api/fetchCollection'
 import { fetchGenres } from '@/api/fetchGenres'
 import { fetchPlatforms } from '@/api/fetchPlatforms'
+import { Footer } from '@/components/Footer/Footer'
 import { GameCard } from '@/components/GameCard/GameCard'
 import { Header } from '@/components/Header/Header'
 import { Hero } from '@/components/Hero/Hero'
 import { Pagination } from '@/components/Pagination/Pagination'
 import { SearchNav } from '@/components/SearchNav/SearchNav'
-import { allGenresContext, allPlatformsContext } from '@/context/context'
+import {
+  allGenresContext,
+  allPlatformsContext,
+  userIdContext,
+} from '@/context/context'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useGameListQuery } from '@/hooks/useGameListQuery'
 import styles from '@/styles/Home.module.css'
-import { QueryClient, dehydrate } from '@tanstack/react-query'
+import { QueryClient, dehydrate, useQuery } from '@tanstack/react-query'
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
-import Link from 'next/link.js'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router.js'
 import { ParsedUrlQuery } from 'querystring'
 import { MouseEvent, useContext, useState } from 'react'
 import { fetchGameList } from '../api/fetchGameList'
@@ -83,6 +88,7 @@ const Home = ({
   initialPage,
   initialSearch,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { userIdCtx } = useContext(userIdContext)
   const { allPlatformsCtx } = useContext(allPlatformsContext)
   const { allGenresCtx } = useContext(allGenresContext)
   const router = useRouter()
@@ -98,7 +104,6 @@ const Home = ({
     data: gameList,
     isLoading,
     isFetching,
-    isError,
   } = useGameListQuery(
     page_size,
     page,
@@ -144,16 +149,14 @@ const Home = ({
     )
   }
 
-  // const prefetchGame = async (event: MouseEvent) => {
-  //   console.log('Event:', event)
-  //   const gameId = event.toString()
-  //   const queryClient = new QueryClient()
-  //   await queryClient.prefetchQuery({
-  //     queryKey: ['game', gameId],
-  //     queryFn: () => fetchGame(gameId),
-  //     staleTime: 10 * 1000,
-  //   })
-  // }
+  const { data: collection } = useQuery({
+    queryKey: ['collection'],
+    queryFn: () => fetchCollection(userIdCtx),
+    enabled: userIdCtx !== '',
+  })
+
+  console.log('collection', collection)
+  console.log('gameList', gameList)
 
   return (
     <div className={styles.container}>
@@ -188,25 +191,19 @@ const Home = ({
         />
         <div className={styles.list}>
           {gameList?.results.map((game) => (
-            <Link
+            <GameCard
               key={game.id}
-              href={`/game/${game.id}/${encodeURIComponent(`${game.slug}`)}`}
-              className={styles.gamecard_link}
-            >
-              <GameCard
-                title={game.name}
-                picture={game.background_image}
-                key={game.id}
-                // onMouseEnter={}
-              />
-            </Link>
+              gameName={game.name}
+              gameImage={game.background_image}
+              gameId={game.id.toString()}
+              gameSlug={game.slug}
+              inCollection={userIdCtx !== '' && false}
+            />
           ))}
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        Powered by Rawg API - made by Sebmosa
-      </footer>
+      <Footer />
     </div>
   )
 }

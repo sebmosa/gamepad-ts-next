@@ -16,6 +16,7 @@ export const fetchGameList = async (
         : `&platforms=&genres=`
     }&metacritic=${rating}&ordering=${sort}`
   )
+
   if (!response.ok) {
     throw new Error('Network response was not ok, no games fetched')
   }

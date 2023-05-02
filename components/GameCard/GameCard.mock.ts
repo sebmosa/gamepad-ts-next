@@ -1,8 +1,10 @@
 import { IGameCard } from './GameCard'
 
 const base: IGameCard = {
-  title: 'Mario Kart 8 Deluxe',
-  picture: '../../public/GameCard/mocks/mario.jpg',
+  gameName: 'Mario Kart 8 Deluxe',
+  gameImage: '../../public/GameCard/mocks/mario.jpg',
+  gameId: '051',
+  gameSlug: 'Mario-Kart-8-Deluxe',
 }
 
 export const mockGameCardProps = {

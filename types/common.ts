@@ -44,3 +44,15 @@ export interface IGame {
   publishers: [{ id: number; name: string; slug: string }]
   esrb_rating: { id: number; name: string; slug: string }
 }
+
+export interface ICollection {
+  _id: string
+  games: [
+    {
+      _id: string
+      image: string
+      name: string
+    }
+  ]
+  owner: string
+}

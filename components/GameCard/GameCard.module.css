@@ -1,6 +1,7 @@
 .container {
   overflow: hidden;
   cursor: pointer;
+  position: relative;
 }
 
 .cover {
@@ -34,4 +35,30 @@
   word-break: break-word;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.game_link {
+  text-decoration: none;
+}
+
+.add_to_collection,
+.add_to_collection__active {
+  border-radius: var(--radius-search);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1;
+  opacity: 0.88;
+}
+
+.add_to_collection {
+  background-color: var(--jade-grey);
+}
+
+.add_to_collection__active {
+  background-color: var(--red-light);
+}
+
+.add_to_collection:hover {
+  opacity: 1;
 }

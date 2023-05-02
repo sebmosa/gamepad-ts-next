@@ -1,0 +1,60 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.main {
+  width: var(--container-width);
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.banner {
+  display: flex;
+}
+
+.image__wrapper {
+  margin-right: 5rem;
+  margin-bottom: 2.5rem;
+  margin-top: 2rem;
+}
+
+.details {
+  margin-top: 2.5rem;
+  width: 40%;
+}
+
+.detail {
+  text-transform: capitalize;
+  color: var(--jade-grey);
+  font-weight: 500;
+}
+
+.line {
+  text-indent: 0.5rem;
+  text-align: justify;
+}
+
+.description {
+  text-transform: capitalize;
+  color: var(--jade-grey);
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 2.5rem;
+}
+
+.desc_line {
+  text-align: justify;
+  line-height: 1.75;
+}
+
+.metacritic {
+  margin-top: 0.5rem;
+  text-indent: 1rem;
+  line-height: 1.75rem;
+  text-transform: capitalize;
+  font-size: 1.125rem;
+  color: var(--white);
+  text-shadow: var(--green-light) 1px 0 0.75rem;
+}

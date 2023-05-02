@@ -1,24 +1,18 @@
 import { Dialog, Transition } from '@headlessui/react'
-import {
-  Component,
-  Fragment,
-  MutableRefObject,
-  ReactNode,
-  useState,
-} from 'react'
+import { Component, Fragment, ReactNode, useRef, useState } from 'react'
 import styles from './Modal.module.css'
 export interface IModal {
   as: string | Component
   className?: string
   open: boolean
-  initialFocus?: MutableRefObject<null>
+  // initialFocus?: MutableRefObject<null>
   children?: ReactNode
   onClose: (d: false) => void
 }
 
-export const Modal = ({ open, onClose, children, initialFocus }: IModal) => {
+export const Modal = ({ open, onClose, children }: IModal) => {
   const [isOpen, setIsOpen] = useState(open)
-
+  const focusRef = useRef(null)
   return (
     <div>
       <Transition
@@ -32,8 +26,8 @@ export const Modal = ({ open, onClose, children, initialFocus }: IModal) => {
           as="div"
           open={isOpen}
           onClose={onClose}
-          initialFocus={initialFocus}
-          className={styles.dialog}
+          initialFocus={focusRef}
+          className={styles.modal}
         >
           <Transition.Child
             as={Fragment}

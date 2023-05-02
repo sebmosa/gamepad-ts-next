@@ -1,0 +1,46 @@
+.modal {
+  position: relative;
+  z-index: 1;
+}
+
+.modal_panel {
+  width: 30%;
+  background-color: var(--jade-faded);
+  color: var(--jade-dark);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  width: 400px;
+  max-width: 100%;
+  height: 400px;
+  max-height: 100%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal_backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background-color: var(--background);
+  opacity: 0.5;
+}
+
+.modal_centering {
+  vertical-align: middle;
+  height: 100vh;
+  display: inline-block;
+}
+
+.modal__input {
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.sign-link {
+  cursor: pointer;
+}

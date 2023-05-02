@@ -1,24 +1,100 @@
-import { MutableRefObject } from 'react'
-import { Modal } from '../Modal/Modal'
+import { apiUrl } from '@/api/index'
+import { userIdContext, usernameContext } from '@/context/context'
+import { useContext, useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import styles from './SignIn.module.css'
 export interface ISignIn {
-  open: boolean
-  initialFocus?: MutableRefObject<null>
-  onClose: (d: false) => void
+  setUser: (token: string, id: string) => void
+  setIsOpen: (open: boolean) => void
 }
 
-export const SignIn = ({ open, onClose, initialFocus }: ISignIn) => {
-  // const [open, setOpen] = useState(false)
-  // const initialFocus = useRef(null)
-  // const closeDialog = () => {
-  //   setOpen(false)
-  // }
+export const SignIn = ({ setUser, setIsOpen }: ISignIn) => {
+  const { userIdCtx } = useContext(userIdContext)
+  const { setUserIdCtx } = useContext(userIdContext)
+  const { setUsernameCtx } = useContext(usernameContext)
+  const [invalidUser, setInvalidUser] = useState(false)
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>()
+
+  interface FormValues {
+    email: string
+    password: string
+  }
+
+  const postSignIn: SubmitHandler<FormValues> = async (data) => {
+    try {
+      const response = await fetch(`${apiUrl}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      const result = await response.json()
+
+      if (result.msg === 'Invalid user') {
+        setInvalidUser(true)
+      }
+      if (result.token) {
+        setUserIdCtx(result._id)
+        setUser(result.token, result._id)
+      }
+
+      if (result) {
+        setUsernameCtx(result.account.username)
+        setIsOpen(false)
+      }
+
+      reset(data)
+    } catch (error) {
+      console.error('Error:', error)
+    }
+  }
 
   return (
-    <Modal as="div" open={open} onClose={onClose} initialFocus={initialFocus}>
-      <Modal.Title as="h3" className={styles.signin_title}>
-        Sign In
-      </Modal.Title>
-    </Modal>
+    <>
+      <form onSubmit={handleSubmit((data) => postSignIn(data))}>
+        <input
+          type="email"
+          placeholder="Email address"
+          autoComplete="off"
+          {...register('email', {
+            required: 'Email is required.',
+            pattern: {
+              value:
+                /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i,
+              message: 'Email is not valid.',
+            },
+          })}
+          className={styles.modal__input}
+        />
+        {errors.email && <p className="errorMsg">{errors.email.message}</p>}
+        <input
+          type="password"
+          placeholder="Password"
+          autoComplete="off"
+          {...register('password', { required: true })}
+          className={styles.modal__input}
+        />
+        {errors.password?.type === 'required' && (
+          <p className="errorMsg">Password is required.</p>
+        )}
+        {invalidUser && (
+          <p className="errorMsg">
+            This account does not exist, please try another account or create a
+            new one by clicking on the Sign Up link below.
+          </p>
+        )}
+        <button type="submit">Submit</button>
+      </form>
+      <button onClick={() => setIsOpen(false)}>Cancel</button>
+    </>
   )
 }

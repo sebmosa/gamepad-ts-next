@@ -1,10 +1,10 @@
-import { ISignIn } from './SignIn'
+import { ISignUp } from './SignUp'
 
-const base: ISignIn = {
+const base: ISignUp = {
   setUser: (token: string, id: string) => {},
   setIsOpen: (open: boolean) => {},
 }
 
-export const mockSignInProps = {
+export const mockSignUpProps = {
   base,
 }

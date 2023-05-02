@@ -24,6 +24,12 @@
   text-decoration: none;
 }
 
+.header_link:hover,
+.header_logout:hover {
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--red-hover);
+}
+
 .header_link__active {
   margin-right: 0.75rem;
   color: var(--jade-grey);
@@ -31,4 +37,10 @@
   font-weight: 500;
   padding-bottom: 0.25rem;
   border-bottom: 2px solid var(--red);
+}
+
+.header_logout {
+  margin-left: 0.75rem;
+  color: var(--jade-grey);
+  text-decoration: none;
 }
