@@ -1,3 +1,4 @@
+import { addToCollection } from '@/api/addToCollection'
 import { fetchCollection } from '@/api/fetchCollection'
 import { fetchGenres } from '@/api/fetchGenres'
 import { fetchPlatforms } from '@/api/fetchPlatforms'
@@ -197,6 +198,14 @@ const Home = ({
               gameImage={game.background_image}
               gameId={game.id.toString()}
               gameSlug={game.slug}
+              onClick={() =>
+                addToCollection(
+                  userIdCtx,
+                  game.id.toString(),
+                  game.name,
+                  game.background_image
+                )
+              }
               inCollection={userIdCtx !== '' && false}
             />
           ))}

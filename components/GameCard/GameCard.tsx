@@ -11,6 +11,7 @@ export interface IGameCard {
   gameId: string
   gameSlug?: string
   inCollection?: boolean
+  onClick: () => void
 }
 
 export const GameCard = ({
@@ -19,6 +20,7 @@ export const GameCard = ({
   gameId,
   gameSlug,
   inCollection,
+  onClick,
 }: IGameCard) => {
   return (
     <div className={styles.container}>
@@ -30,7 +32,7 @@ export const GameCard = ({
             : styles.add_to_collection
         }
         alt="add to collection button"
-        onClick={() => {}}
+        onClick={onClick}
       />
       <Link
         href={`/game/${gameId}/${encodeURIComponent(`${gameSlug}`)}`}
