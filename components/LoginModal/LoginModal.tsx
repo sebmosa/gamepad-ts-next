@@ -55,12 +55,13 @@ export const LoginModal = ({
                   Sign Up
                 </Dialog.Title>
                 <SignUp setUser={setUser} setIsOpen={setIsOpen} />
-                <Dialog.Description>
+                <Dialog.Description className={styles.dialog}>
                   Already have a Gamepad account{' '}
                   <a
                     onClick={() => {
                       setSignIn(true)
                     }}
+                    className={styles.sign_link}
                   >
                     Sign In
                   </a>
@@ -73,7 +74,7 @@ export const LoginModal = ({
                   Sign In
                 </Dialog.Title>
                 <SignIn setUser={setUser} setIsOpen={setIsOpen} />
-                <Dialog.Description>
+                <Dialog.Description className={styles.dialog}>
                   Don’t have a Gamepad account?{' '}
                   <a
                     onClick={() => {

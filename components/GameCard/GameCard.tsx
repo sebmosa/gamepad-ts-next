@@ -10,8 +10,9 @@ export interface IGameCard {
   gameImage: string
   gameId: string
   gameSlug?: string
-  inCollection?: boolean
-  onClick: () => void
+  inCollection?: { _id: string; image: string; name: string }
+  logged?: boolean
+  onClick?: () => void
 }
 
 export const GameCard = ({
@@ -20,20 +21,29 @@ export const GameCard = ({
   gameId,
   gameSlug,
   inCollection,
+  logged,
   onClick,
 }: IGameCard) => {
   return (
     <div className={styles.container}>
-      <Image
-        src={plus}
-        className={
-          inCollection
-            ? styles.add_to_collection__active
-            : styles.add_to_collection
-        }
-        alt="add to collection button"
-        onClick={onClick}
-      />
+      {logged && (
+        <div
+          className={
+            inCollection ? styles.atc_wrapper__active : styles.atc_wrapper
+          }
+        >
+          <Image
+            src={plus}
+            className={
+              inCollection
+                ? styles.add_to_collection__active
+                : styles.add_to_collection
+            }
+            alt="add to collection button"
+            onClick={onClick}
+          />
+        </div>
+      )}
       <Link
         href={`/game/${gameId}/${encodeURIComponent(`${gameSlug}`)}`}
         className={styles.game_link}

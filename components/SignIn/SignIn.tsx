@@ -59,7 +59,7 @@ export const SignIn = ({ setUser, setIsOpen }: ISignIn) => {
   }
 
   return (
-    <>
+    <div className={styles.form__wrapper}>
       <form onSubmit={handleSubmit((data) => postSignIn(data))}>
         <input
           type="email"
@@ -92,9 +92,13 @@ export const SignIn = ({ setUser, setIsOpen }: ISignIn) => {
             new one by clicking on the Sign Up link below.
           </p>
         )}
-        <button type="submit">Submit</button>
+        <button type="submit" className={styles.submit}>
+          Sign In
+        </button>
       </form>
-      <button onClick={() => setIsOpen(false)}>Cancel</button>
-    </>
+      <button className={styles.cancel} onClick={() => setIsOpen(false)}>
+        Cancel
+      </button>
+    </div>
   )
 }

@@ -84,6 +84,7 @@ h6 {
   --red-dark: hsl(355, 50%, 35%);
   --red-darker: hsl(355, 3%, 7%);
   --green-light: hsl(134, 100%, 64%);
+  --green-faded: hsl(134, 100%, 94%);
 }
 
 /* General */
@@ -102,4 +103,7 @@ body {
   color: var(--red);
   font-size: 0.938rem;
   font-weight: 300;
+  text-indent: 1rem;
+  position: relative;
+  top: -0.75rem;
 }

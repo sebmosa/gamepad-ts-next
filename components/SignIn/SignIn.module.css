@@ -1,12 +1,63 @@
-/* :root {
-  --container-padding: 1.25rem;
-  --container-width: calc(100% - var(--container-padding) * 2);
-  --container-max-width: 28rem;
-}
-
-.container {
-  width: var(--container-width);
-  max-width: var(--container-max-width);
+.modal__input {
+  margin-bottom: 1rem;
   margin-left: auto;
   margin-right: auto;
-} */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid var(--jade-grey);
+  border-radius: var(--radius-select);
+  height: 2rem;
+  padding-left: 1rem;
+  font-weight: 100;
+}
+
+.modal__input:focus-visible {
+  outline: 0;
+  background-color: var(--green-faded);
+}
+
+.modal__input:first-child {
+  margin-top: 3rem;
+}
+
+.sign-link {
+  cursor: pointer;
+}
+
+.submit {
+  float: right;
+  margin-top: 0.5rem;
+  border: 0;
+  border-radius: var(--radius-select);
+  color: var(--white);
+  background-color: var(--red-darker);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 2rem;
+  font-weight: 400;
+  box-shadow: hsl(134deg 100% 64% / 10%) 0px 4px 8px -2px,
+    hsl(134deg 100% 64% / 6%) 0px 0px 0px 1px;
+  cursor: pointer;
+}
+
+.cancel {
+  margin-top: 0.5rem;
+  border: 0;
+  border-radius: var(--radius-select);
+  color: var(--white);
+  background-color: var(--red-dark);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 2rem;
+  font-weight: 400;
+  box-shadow: hsl(134deg 100% 64% / 10%) 0px 4px 8px -2px,
+    hsl(134deg 100% 64% / 6%) 0px 0px 0px 1px;
+  cursor: pointer;
+}
+
+.errorMsg {
+  text-indent: 1rem;
+  position: relative;
+  top: -0.75rem;
+}

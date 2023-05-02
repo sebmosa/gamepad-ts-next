@@ -85,7 +85,7 @@ export const SignUp = ({ setUser, setIsOpen }: ISignUp) => {
   }
 
   return (
-    <>
+    <div className={styles.form__wrapper}>
       <form onSubmit={handleSubmit((data) => postSignUp(data))}>
         <input
           type="text"
@@ -158,9 +158,13 @@ export const SignUp = ({ setUser, setIsOpen }: ISignUp) => {
             This account already exists, please choose another email address.
           </p>
         )}
-        <button type="submit">Submit</button>
+        <button type="submit" className={styles.submit}>
+          Sign Up
+        </button>
       </form>
-      <button onClick={() => setIsOpen(false)}>Cancel</button>
-    </>
+      <button className={styles.cancel} onClick={() => setIsOpen(false)}>
+        Cancel
+      </button>
+    </div>
   )
 }

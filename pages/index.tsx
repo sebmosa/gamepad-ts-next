@@ -2,6 +2,7 @@ import { addToCollection } from '@/api/addToCollection'
 import { fetchCollection } from '@/api/fetchCollection'
 import { fetchGenres } from '@/api/fetchGenres'
 import { fetchPlatforms } from '@/api/fetchPlatforms'
+import { removeFromCollection } from '@/api/removeFromCollection'
 import { Footer } from '@/components/Footer/Footer'
 import { GameCard } from '@/components/GameCard/GameCard'
 import { Header } from '@/components/Header/Header'
@@ -21,7 +22,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router.js'
 import { ParsedUrlQuery } from 'querystring'
-import { MouseEvent, useContext, useState } from 'react'
+import { MouseEvent, useContext, useEffect, useState } from 'react'
 import { fetchGameList } from '../api/fetchGameList'
 
 const first_page = 1
@@ -99,6 +100,8 @@ const Home = ({
   const [genre, setGenre] = useState('')
   const [rating, setRating] = useState('0-100')
   const [sort, setSort] = useState('-metacritic')
+  const [isInCollection, setIsInCollection] = useState(false)
+  const [enabled, setEnabled] = useState(false)
   const debounceSearch = useDebounce(search, 500)
 
   const {
@@ -114,6 +117,8 @@ const Home = ({
     rating,
     sort
   )
+
+  const totalGames = gameList?.count
 
   const handleSearch = (value: string) => {
     setSearch(value)
@@ -150,14 +155,44 @@ const Home = ({
     )
   }
 
+  const logged = userIdCtx !== ''
+
+  useEffect(() => {
+    logged && setEnabled(true)
+  }, [logged])
+
   const { data: collection } = useQuery({
-    queryKey: ['collection'],
+    queryKey: ['collection', userIdCtx, isInCollection],
     queryFn: () => fetchCollection(userIdCtx),
-    enabled: userIdCtx !== '',
+    enabled: true,
   })
 
-  console.log('collection', collection)
-  console.log('gameList', gameList)
+  const checkIsInCollection = (gameId: string) => {
+    collection?.games.find((elem) => {
+      return elem._id === gameId
+        ? setIsInCollection(true)
+        : setIsInCollection(false)
+    })
+  }
+
+  const toggleCollection = (
+    userId: string,
+    gameId: string,
+    name: string,
+    image: string
+  ) => {
+    checkIsInCollection(gameId)
+
+    console.log('isInCollection', isInCollection)
+
+    if (isInCollection) {
+      removeFromCollection(userId, gameId)
+      setIsInCollection(false)
+    } else {
+      addToCollection(userId, gameId, name, image)
+      setIsInCollection(true)
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -170,7 +205,7 @@ const Home = ({
       <Header />
 
       <main className={styles.main}>
-        <Hero totalGames={gameList?.count} />
+        <Hero totalGames={totalGames} />
         <SearchNav
           placeholder="Search for a game..."
           search={search}
@@ -199,14 +234,17 @@ const Home = ({
               gameId={game.id.toString()}
               gameSlug={game.slug}
               onClick={() =>
-                addToCollection(
+                toggleCollection(
                   userIdCtx,
                   game.id.toString(),
                   game.name,
                   game.background_image
                 )
               }
-              inCollection={userIdCtx !== '' && false}
+              logged={logged}
+              inCollection={collection?.games?.find((elem) => {
+                return elem._id === game?.id.toString()
+              })}
             />
           ))}
         </div>

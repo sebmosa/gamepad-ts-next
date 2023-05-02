@@ -1,7 +1,7 @@
 .header {
   margin: 0.75rem;
   display: flex;
-  justify-content: space-between;
+  flex-flow: column;
   align-items: center;
 }
 
@@ -16,6 +16,7 @@
 .header_links {
   display: flex;
   list-style: none;
+  padding-left: 0;
 }
 
 .header_link {
@@ -43,4 +44,11 @@
   margin-left: 0.75rem;
   color: var(--jade-grey);
   text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .header {
+    justify-content: space-between;
+    flex-flow: row;
+  }
 }

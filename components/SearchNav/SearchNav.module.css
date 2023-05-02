@@ -1,5 +1,12 @@
 .search_nav {
   display: flex;
-  margin: 0.75rem;
+  flex-flow: column;
   align-items: center;
+}
+
+@media (min-width: 768px) {
+  .search_nav {
+    flex-flow: row;
+    margin: 0.75rem;
+  }
 }

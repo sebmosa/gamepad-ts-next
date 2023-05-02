@@ -1,15 +1,13 @@
 .search_bar {
   display: flex;
-  align-items: center;
   position: relative;
-  margin-right: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 
 .search_bar__input,
 .search_bar__input_active {
   border: 0;
   padding: 0.375rem;
-  width: 200px;
   padding-left: calc(0.5rem + 1rem + 0.5rem);
   line-height: 0;
   background-color: var(--jade-grey);
@@ -62,4 +60,17 @@
 .close_icon {
   width: 1rem;
   height: 1rem;
+}
+
+@media (min-width: 768px) {
+  .search_bar {
+    align-items: center;
+    margin-right: 0.75rem;
+    margin-bottom: 0;
+  }
+
+  .search_bar__input,
+  .search_bar__input_active {
+    width: 200px;
+  }
 }

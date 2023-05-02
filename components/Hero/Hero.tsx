@@ -9,8 +9,8 @@ export const Hero = ({ totalGames }: IHero) => {
       <h2 className={styles.hero_title}>It&apos;s time to collect!</h2>
       <div className={styles.hero_text__wrapper}>
         <h2 className={styles.hero_text}>
-          Make your collection among the {totalGames} video games of the largest
-          free internet database.
+          Make your collection among the {totalGames} video games finded of the
+          largest free internet database.
         </h2>
       </div>
       {/* <div className={styles.hero_build__wrapper}>

@@ -10,8 +10,26 @@
   margin-right: auto;
 }
 
+.main h1 {
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
 .list {
   display: flex;
   flex-wrap: wrap;
   position: relative;
+}
+
+.game_wrapper {
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+  .main h1 {
+    text-align: justify;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
 }

@@ -73,7 +73,6 @@ export const SearchNav = ({
     'name',
     'released',
     'added',
-    'created',
     'updated',
     'rating',
     'metacritic',
