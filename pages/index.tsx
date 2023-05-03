@@ -24,6 +24,7 @@ import { useRouter } from 'next/router.js'
 import { ParsedUrlQuery } from 'querystring'
 import { MouseEvent, useContext, useEffect, useState } from 'react'
 import { fetchGameList } from '../api/fetchGameList'
+import ErrorBoundary from '../components/ErrorBoundary'
 
 const first_page = 1
 const page_size = 20
@@ -198,51 +199,59 @@ const Home = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <ErrorBoundary>
+        <Header />
+      </ErrorBoundary>
 
       <main className={styles.main}>
         <Hero totalGames={totalGames} />
-        <SearchNav
-          placeholder="Search for a game..."
-          search={search}
-          platform={platform}
-          genre={genre}
-          sort={sort}
-          onInputChange={(value) => handleSearch(value)}
-          onClick={resetClick}
-          onChangePlatform={(value) => onChangePlatform(value)}
-          onChangeGenre={(value) => onChangeGenre(value)}
-          onChangeSort={(value) => onChangeSort(value)}
-        />
-        <Pagination
-          currentPage={page}
-          count={gameList?.count || 0}
-          pageSize={page_size}
-          onPageChange={onChangePagination}
-          disabled={isLoading || isFetching}
-        />
+        <ErrorBoundary>
+          <SearchNav
+            placeholder="Search for a game..."
+            search={search}
+            platform={platform}
+            genre={genre}
+            sort={sort}
+            onInputChange={(value) => handleSearch(value)}
+            onClick={resetClick}
+            onChangePlatform={(value) => onChangePlatform(value)}
+            onChangeGenre={(value) => onChangeGenre(value)}
+            onChangeSort={(value) => onChangeSort(value)}
+          />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Pagination
+            currentPage={page}
+            count={gameList?.count || 0}
+            pageSize={page_size}
+            onPageChange={onChangePagination}
+            disabled={isLoading || isFetching}
+          />
+        </ErrorBoundary>
         <div className={styles.list}>
-          {gameList?.results.map((game) => (
-            <GameCard
-              key={game.id}
-              gameName={game.name}
-              gameImage={game.background_image}
-              gameId={game.id.toString()}
-              gameSlug={game.slug}
-              onClick={() =>
-                toggleCollection(
-                  userIdCtx,
-                  game.id.toString(),
-                  game.name,
-                  game.background_image
-                )
-              }
-              logged={logged}
-              inCollection={collection?.games?.find((elem) => {
-                return elem._id === game?.id.toString()
-              })}
-            />
-          ))}
+          <ErrorBoundary>
+            {gameList?.results.map((game) => (
+              <GameCard
+                key={game.id}
+                gameName={game.name}
+                gameImage={game.background_image}
+                gameId={game.id.toString()}
+                gameSlug={game.slug}
+                onClick={() =>
+                  toggleCollection(
+                    userIdCtx,
+                    game.id.toString(),
+                    game.name,
+                    game.background_image
+                  )
+                }
+                logged={logged}
+                inCollection={collection?.games?.find((elem) => {
+                  return elem._id === game?.id.toString()
+                })}
+              />
+            ))}
+          </ErrorBoundary>
         </div>
       </main>
 
