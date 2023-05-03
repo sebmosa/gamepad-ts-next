@@ -3,7 +3,7 @@ import { deleteCookie, getCookie, setCookie } from 'cookies-next'
 import Image from 'next/image.js'
 import Link from 'next/link.js'
 import { useRouter } from 'next/router.js'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import logo from '../../public/logo-gamepad.svg'
 import { LoginModal } from '../LoginModal/LoginModal'
 import styles from './Header.module.css'
@@ -15,6 +15,21 @@ export const Header = () => {
   const { setUserIdCtx } = useContext(userIdContext)
   const { usernameCtx } = useContext(usernameContext)
   const [token, setToken] = useState(getCookie('userToken' || null))
+  const [isOpen, setIsOpen] = useState(false)
+  const [username, setUsername] = useState('')
+
+  useEffect(() => {
+    setUsername(usernameCtx)
+  }, [usernameCtx])
+
+  // workaround for ssr hydration and have same render in client and server side
+  const [hasMounted, setHasMounted] = useState(false)
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
+  if (!hasMounted) {
+    return null
+  }
 
   const setUser = (token: string | null, id: string | null) => {
     if (token) {
@@ -27,8 +42,6 @@ export const Header = () => {
     setToken(token)
   }
 
-  const [isOpen, setIsOpen] = useState(false)
-
   const closeModal = () => {
     setIsOpen(false)
   }
@@ -36,6 +49,8 @@ export const Header = () => {
   const openModal = () => {
     setIsOpen(true)
   }
+
+  console.log('username', username)
 
   return (
     <header className={styles.header}>
@@ -78,7 +93,7 @@ export const Header = () => {
           </li>
           {token ? (
             <li>
-              {usernameCtx}
+              {username}
               <Link
                 className={styles.header_logout}
                 href=""
