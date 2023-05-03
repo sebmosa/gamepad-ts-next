@@ -1,4 +1,4 @@
-import { userIdContext, usernameContext } from '@/context/context'
+import { userIdContext } from '@/context/context'
 import { deleteCookie, getCookie, setCookie } from 'cookies-next'
 import Image from 'next/image.js'
 import Link from 'next/link.js'
@@ -13,14 +13,8 @@ export interface IHeader {}
 export const Header = () => {
   const router = useRouter()
   const { setUserIdCtx } = useContext(userIdContext)
-  const { usernameCtx } = useContext(usernameContext)
   const [token, setToken] = useState(getCookie('userToken' || null))
   const [isOpen, setIsOpen] = useState(false)
-  const [username, setUsername] = useState('')
-
-  useEffect(() => {
-    setUsername(usernameCtx)
-  }, [usernameCtx])
 
   // workaround for ssr hydration and have same render in client and server side
   const [hasMounted, setHasMounted] = useState(false)
@@ -31,10 +25,17 @@ export const Header = () => {
     return null
   }
 
-  const setUser = (token: string | null, id: string | null) => {
+  type SetUser = (
+    token: string | null,
+    id: string | null,
+    username: string | null
+  ) => void
+
+  const setUser: SetUser = (token, id, username) => {
     if (token) {
       setCookie('userToken', token, { maxAge: 60 * 30 })
       setCookie('userId', id, { maxAge: 60 * 30 })
+      setCookie('userName', username, { maxAge: 60 * 30 })
     } else {
       deleteCookie('userToken')
       deleteCookie('userId')
@@ -50,7 +51,7 @@ export const Header = () => {
     setIsOpen(true)
   }
 
-  console.log('username', username)
+  const username = getCookie('userName')
 
   return (
     <header className={styles.header}>
@@ -92,13 +93,13 @@ export const Header = () => {
             </Link>
           </li>
           {token ? (
-            <li>
+            <li className={styles.header_username}>
               {username}
               <Link
                 className={styles.header_logout}
                 href=""
                 onClick={() => {
-                  setUser(null, null)
+                  setUser(null, null, null)
                   setUserIdCtx('')
                 }}
               >

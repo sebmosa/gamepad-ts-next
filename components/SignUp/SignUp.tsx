@@ -1,15 +1,18 @@
-import { userIdContext, usernameContext } from '@/context/context'
+import { userIdContext } from '@/context/context'
 import { useContext, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import styles from './SignUp.module.css'
 export interface ISignUp {
-  setUser: (token: string, id: string) => void
+  setUser: (
+    token: string | null,
+    id: string | null,
+    username: string | null
+  ) => void
   setIsOpen: (open: boolean) => void
 }
 
 export const SignUp = ({ setUser, setIsOpen }: ISignUp) => {
   const { setUserIdCtx } = useContext(userIdContext)
-  const { setUsernameCtx } = useContext(usernameContext)
   const [userExist, setUserExist] = useState(false)
 
   const {
@@ -54,7 +57,7 @@ export const SignUp = ({ setUser, setIsOpen }: ISignUp) => {
 
       if (result.token) {
         setUserIdCtx(result._id)
-        setUser(result.token, result._id)
+        setUser(result.token, result._id, result.account.username)
       }
 
       if (result.email) {
@@ -74,7 +77,6 @@ export const SignUp = ({ setUser, setIsOpen }: ISignUp) => {
           const loginResult = await loginSignUp.json()
 
           if (loginResult) {
-            setUsernameCtx(result.account.username)
             setIsOpen(false)
           }
         } catch (error) {

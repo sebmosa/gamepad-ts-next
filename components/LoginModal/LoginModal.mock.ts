@@ -3,7 +3,11 @@ import { ILoginModal } from './LoginModal'
 const base: ILoginModal = {
   open: true,
   onClose: () => {},
-  setUser: (token: string, id: string) => {},
+  setUser: (
+    token: string | null,
+    id: string | null,
+    username: string | null
+  ) => {},
   setIsOpen: (open: boolean) => {},
 }
 

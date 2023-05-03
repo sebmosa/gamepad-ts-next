@@ -46,6 +46,10 @@
   text-decoration: none;
 }
 
+.header_username {
+  text-transform: capitalize;
+}
+
 @media (min-width: 768px) {
   .header {
     justify-content: space-between;

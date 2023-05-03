@@ -1,16 +1,18 @@
-import { userIdContext, usernameContext } from '@/context/context'
+import { userIdContext } from '@/context/context'
 import { useContext, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import styles from './SignIn.module.css'
 export interface ISignIn {
-  setUser: (token: string, id: string) => void
+  setUser: (
+    token: string | null,
+    id: string | null,
+    username: string | null
+  ) => void
   setIsOpen: (open: boolean) => void
 }
 
 export const SignIn = ({ setUser, setIsOpen }: ISignIn) => {
-  const { userIdCtx } = useContext(userIdContext)
   const { setUserIdCtx } = useContext(userIdContext)
-  const { setUsernameCtx } = useContext(usernameContext)
   const [invalidUser, setInvalidUser] = useState(false)
 
   const {
@@ -41,13 +43,13 @@ export const SignIn = ({ setUser, setIsOpen }: ISignIn) => {
       if (result.msg === 'Invalid user') {
         setInvalidUser(true)
       }
+
       if (result.token) {
         setUserIdCtx(result._id)
-        setUser(result.token, result._id)
+        setUser(result.token, result._id, result.account.username)
       }
 
       if (result) {
-        setUsernameCtx(result.account.username)
         setIsOpen(false)
       }
 

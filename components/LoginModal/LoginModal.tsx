@@ -6,7 +6,11 @@ import styles from './LoginModal.module.css'
 export interface ILoginModal {
   open: boolean
   onClose: (d: false) => void
-  setUser: (token: string, id: string) => void
+  setUser: (
+    token: string | null,
+    id: string | null,
+    username: string | null
+  ) => void
   setIsOpen: (open: boolean) => void
 }
 
