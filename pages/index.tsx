@@ -22,7 +22,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router.js'
 import { ParsedUrlQuery } from 'querystring'
-import { MouseEvent, useContext, useEffect, useState } from 'react'
+import { MouseEvent, useContext, useState } from 'react'
 import { fetchGameList } from '../api/fetchGameList'
 
 const first_page = 1
@@ -98,10 +98,10 @@ const Home = ({
   const [search, setSearch] = useState(initialSearch)
   const [platform, setPlatform] = useState('')
   const [genre, setGenre] = useState('')
-  const [rating, setRating] = useState('0-100')
+  const [rating] = useState('0-100')
   const [sort, setSort] = useState('-metacritic')
   const [isInCollection, setIsInCollection] = useState(false)
-  const [enabled, setEnabled] = useState(false)
+  // const [enabled, setEnabled] = useState(false)
   const debounceSearch = useDebounce(search, 500)
 
   const {
@@ -157,9 +157,9 @@ const Home = ({
 
   const logged = userIdCtx !== ''
 
-  useEffect(() => {
-    logged && setEnabled(true)
-  }, [logged])
+  // useEffect(() => {
+  //   logged && setEnabled(true)
+  // }, [logged])
 
   const { data: collection } = useQuery({
     queryKey: ['collection', userIdCtx, isInCollection],

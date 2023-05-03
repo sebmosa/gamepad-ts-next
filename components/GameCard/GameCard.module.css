@@ -64,6 +64,13 @@
 }
 
 @media (min-width: 768px) {
+  .container {
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+  }
+
   .cover {
     width: 200px;
     height: 252px;

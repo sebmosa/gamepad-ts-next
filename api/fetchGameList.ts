@@ -1,5 +1,4 @@
 import { IGameList } from '@/types/common'
-import { apiUrl } from './index'
 export const fetchGameList = async (
   page_size: number,
   page: number,
@@ -10,7 +9,9 @@ export const fetchGameList = async (
   sort?: string
 ): Promise<IGameList> => {
   const response = await fetch(
-    `${apiUrl}/games?page_size=${page_size.toString()}&page=${page.toString()}&search=${search}&search_precise=true${
+    `${
+      process.env.NEXT_PUBLIC_API_URL
+    }/games?page_size=${page_size.toString()}&page=${page.toString()}&search=${search}&search_precise=true${
       search
         ? `&platforms=${platforms}&genres=${genres}`
         : `&platforms=&genres=`

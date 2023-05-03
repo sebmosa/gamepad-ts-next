@@ -1,4 +1,3 @@
-import { apiUrl } from '@/api/index'
 import { userIdContext, usernameContext } from '@/context/context'
 import { useContext, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -37,10 +36,13 @@ export const SignUp = ({ setUser, setIsOpen }: ISignUp) => {
     formData.append('avatar', data.avatar)
 
     try {
-      const response = await fetch(`${apiUrl}/signup`, {
-        method: 'POST',
-        body: formData,
-      })
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/signup`,
+        {
+          method: 'POST',
+          body: formData,
+        }
+      )
 
       const result = await response.json()
 
@@ -57,14 +59,17 @@ export const SignUp = ({ setUser, setIsOpen }: ISignUp) => {
 
       if (result.email) {
         try {
-          const loginSignUp = await fetch(`${apiUrl}/login`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-            },
-            body: JSON.stringify(data),
-          })
+          const loginSignUp = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/login`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+              },
+              body: JSON.stringify(data),
+            }
+          )
 
           const loginResult = await loginSignUp.json()
 
