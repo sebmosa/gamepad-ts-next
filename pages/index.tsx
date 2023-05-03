@@ -22,7 +22,7 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router.js'
 import { ParsedUrlQuery } from 'querystring'
-import { MouseEvent, useContext, useState } from 'react'
+import { MouseEvent, useContext, useEffect, useState } from 'react'
 import { fetchGameList } from '../api/fetchGameList'
 
 const first_page = 1
@@ -100,8 +100,8 @@ const Home = ({
   const [genre, setGenre] = useState('')
   const [rating] = useState('0-100')
   const [sort, setSort] = useState('-metacritic')
+  const [logged, setLogged] = useState(false)
   const [isInCollection, setIsInCollection] = useState(false)
-  // const [enabled, setEnabled] = useState(false)
   const debounceSearch = useDebounce(search, 500)
 
   const {
@@ -155,11 +155,9 @@ const Home = ({
     )
   }
 
-  const logged = userIdCtx !== ''
-
-  // useEffect(() => {
-  //   logged && setEnabled(true)
-  // }, [logged])
+  useEffect(() => {
+    setLogged(userIdCtx !== '' && true)
+  }, [userIdCtx])
 
   const { data: collection } = useQuery({
     queryKey: ['collection', userIdCtx, isInCollection],
@@ -182,8 +180,6 @@ const Home = ({
     image: string
   ) => {
     checkIsInCollection(gameId)
-
-    console.log('isInCollection', isInCollection)
 
     if (isInCollection) {
       removeFromCollection(userId, gameId)
