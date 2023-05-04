@@ -1,5 +1,4 @@
 .container {
-  overflow: hidden;
   cursor: pointer;
   position: relative;
   margin: auto;
@@ -43,9 +42,11 @@
 .add_to_collection__active {
   border-radius: var(--radius-search);
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -1rem;
+  right: -1rem;
   z-index: 1;
+  width: 2rem;
+  height: 2rem;
 }
 
 .add_to_collection {
@@ -67,8 +68,6 @@
 @media (min-width: 768px) {
   .container {
     overflow: hidden;
-    cursor: pointer;
-    position: relative;
     margin: 0;
   }
 
@@ -91,5 +90,7 @@
   .add_to_collection__active {
     top: 1rem;
     right: 1rem;
+    width: auto;
+    height: auto;
   }
 }
