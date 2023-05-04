@@ -1,7 +1,6 @@
 .search_bar {
   display: flex;
   position: relative;
-  margin-bottom: 1.25rem;
 }
 
 .search_bar__input,
@@ -66,7 +65,6 @@
   .search_bar {
     align-items: center;
     margin-right: 0.75rem;
-    margin-bottom: 0;
   }
 
   .search_bar__input,

@@ -1,9 +1,9 @@
 .select_wrapper {
   margin-left: 0.75rem;
   margin-right: 0.75rem;
+  margin-top: 0.5rem;
   position: relative;
   width: 12rem;
-  z-index: 2;
 }
 
 .select_button {
@@ -71,5 +71,16 @@
   border-bottom-right-radius: var(--radius-select);
 }
 
+.select_label {
+  margin-top: 1rem;
+}
+
 @media (min-width: 768px) {
+  .select_wrapper {
+    margin-top: 0;
+    z-index: 2;
+  }
+  .select_label {
+    margin-top: 0;
+  }
 }

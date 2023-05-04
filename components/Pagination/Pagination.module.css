@@ -8,6 +8,7 @@
 .page_list {
   display: flex;
   padding-inline-start: 0;
+  flex-wrap: wrap;
 }
 
 .page_list__page {

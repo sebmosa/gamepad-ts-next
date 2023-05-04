@@ -24,7 +24,7 @@ export const Select = ({
 }: ISelect) => {
   return (
     <Listbox value={value} onChange={onChange} disabled={disabled}>
-      <Listbox.Label>{label}</Listbox.Label>
+      <Listbox.Label className={styles.select_label}>{label}</Listbox.Label>
       <div className={styles.select_wrapper}>
         <Listbox.Button className={styles.select_button}>
           <span>
