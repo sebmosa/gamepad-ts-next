@@ -13,12 +13,6 @@ export const Hero = ({ totalGames }: IHero) => {
           largest free internet database.
         </h2>
       </div>
-      {/* <div className={styles.hero_build__wrapper}>
-        <h3 className={styles.hero_build}>
-          Part of full stack project build with RAWG Api + TypeScript + Express
-          + Zod + MongoDB + NextJs + React Query and more...
-        </h3>
-      </div> */}
       <div className={styles.hero_hiw__wrapper}>
         <div className={styles.hero_hiw__sidebar}>
           <h3 className={styles.hero_hiw}>How it works?</h3>

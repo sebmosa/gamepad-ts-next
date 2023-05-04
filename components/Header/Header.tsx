@@ -95,19 +95,21 @@ export const Header = () => {
             </Link>
           </li>
           {token ? (
-            <li className={styles.header_username}>
-              {username}
-              <Link
-                className={styles.header_logout}
-                href=""
-                onClick={() => {
-                  setUser(null, null, null)
-                  setUserIdCtx('')
-                }}
-              >
-                Logout
-              </Link>
-            </li>
+            <>
+              <li className={styles.header_username}>{username}</li>
+              <li>
+                <Link
+                  className={styles.header_logout}
+                  href=""
+                  onClick={() => {
+                    setUser(null, null, null)
+                    setUserIdCtx('')
+                  }}
+                >
+                  Logout
+                </Link>
+              </li>
+            </>
           ) : (
             <li>
               <Link className={styles.header_link} href="" onClick={openModal}>
