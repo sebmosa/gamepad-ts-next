@@ -6,28 +6,26 @@ import { Header } from '@/components/Header/Header'
 import { userIdContext } from '@/context/context'
 import { useQuery } from '@tanstack/react-query'
 import Head from 'next/head.js'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import styles from '../../styles/Collection.module.css'
 
 const Collection = () => {
   const { userIdCtx } = useContext(userIdContext)
-  const [gameInCollection, setGameInCollection] = useState(false)
-
   const logged = userIdCtx !== ''
   const unlogged = userIdCtx === ''
 
-  const { data: collection } = useQuery({
-    queryKey: ['collection', userIdCtx, gameInCollection],
+  const { data: collection, refetch } = useQuery({
+    queryKey: ['collection', userIdCtx],
     queryFn: () => fetchCollection(userIdCtx),
-    enabled: true,
-    refetchOnMount: true,
     refetchOnWindowFocus: true,
+    staleTime: 0,
+    cacheTime: 0,
+    refetchInterval: 0,
   })
 
-  const removeGame = (userId: string, gameId: string) => {
-    removeFromCollection(userId, gameId)
-    setGameInCollection(true)
-    console.log('gameInCollection', gameInCollection)
+  const removeGame = async (userId: string, gameId: string) => {
+    await removeFromCollection(userId, gameId)
+    await refetch()
   }
 
   return (
@@ -56,6 +54,9 @@ const Collection = () => {
                   gameId={game._id}
                   logged={logged}
                   onClick={() => removeGame(userIdCtx, game._id)}
+                  inCollection={collection?.games?.find((elem) => {
+                    return elem._id === game._id
+                  })}
                 />
               </div>
             ))}

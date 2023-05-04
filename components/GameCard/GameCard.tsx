@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link.js'
 import { useCropVersion } from '../../hooks/useCropVersion'
-import plus from '../../public/GameCard/math-plus.svg'
+import minus from '../../public/GameCard/minus.svg'
+import plus from '../../public/GameCard/plus.svg'
 import noimage from '../../public/no-image.svg'
 import styles from './GameCard.module.css'
 
@@ -33,7 +34,7 @@ export const GameCard = ({
           }
         >
           <Image
-            src={plus}
+            src={inCollection ? minus : plus}
             className={
               inCollection
                 ? styles.add_to_collection__active

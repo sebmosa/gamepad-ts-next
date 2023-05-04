@@ -15,7 +15,8 @@
 }
 
 .cover:hover {
-  opacity: 1;
+  border: 1px solid var(--red-grey);
+  opacity: 0.88;
 }
 
 .title {
@@ -78,7 +79,6 @@
     margin-top: 0.75rem;
     margin-left: 0.75rem;
     margin-right: 0.75rem;
-    opacity: 0.88;
   }
 
   .title {

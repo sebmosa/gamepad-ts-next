@@ -102,7 +102,6 @@ const Home = ({
   const [rating] = useState('0-100')
   const [sort, setSort] = useState('-metacritic')
   const [logged, setLogged] = useState(false)
-  const [isInCollection, setIsInCollection] = useState(false)
   const debounceSearch = useDebounce(search, 500)
 
   const {
@@ -157,37 +156,45 @@ const Home = ({
   }
 
   useEffect(() => {
-    setLogged(userIdCtx !== '' && true)
+    setLogged(userIdCtx !== '')
   }, [userIdCtx])
 
-  const { data: collection } = useQuery({
-    queryKey: ['collection', userIdCtx, isInCollection],
+  const { data: collection, refetch } = useQuery({
+    queryKey: ['collection', userIdCtx],
     queryFn: () => fetchCollection(userIdCtx),
-    enabled: true,
+    refetchOnWindowFocus: true,
+    staleTime: 0,
+    cacheTime: 0,
+    refetchInterval: 0,
   })
 
-  const checkIsInCollection = (gameId: string) => {
-    collection?.games.find((elem) => {
-      return elem._id === gameId
-        ? setIsInCollection(true)
-        : setIsInCollection(false)
-    })
-  }
-
-  const toggleCollection = (
+  const addTo = async (
     userId: string,
     gameId: string,
     name: string,
     image: string
   ) => {
-    checkIsInCollection(gameId)
+    await addToCollection(userId, gameId, name, image)
+    await refetch()
+  }
 
-    if (isInCollection) {
-      removeFromCollection(userId, gameId)
-      setIsInCollection(false)
+  const removeFrom = async (userId: string, gameId: string) => {
+    await removeFromCollection(userId, gameId)
+    await refetch()
+  }
+
+  const toggleCollection = async (
+    userId: string,
+    gameId: string,
+    name: string,
+    image: string
+  ) => {
+    const gameExists = collection?.games.some((elem) => elem._id === gameId)
+
+    if (gameExists) {
+      await removeFrom(userId, gameId)
     } else {
-      addToCollection(userId, gameId, name, image)
-      setIsInCollection(true)
+      await addTo(userId, gameId, name, image)
     }
   }
 
