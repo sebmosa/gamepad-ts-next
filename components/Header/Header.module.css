@@ -50,9 +50,36 @@
   text-transform: capitalize;
 }
 
+.github {
+  fill: currentColor !important;
+}
+
+.github_link {
+  fill: var(--jade-grey);
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+
+.github_link:hover {
+  color: var(--white);
+}
+
+.linkedin {
+  width: 38.5px;
+  height: 33px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -0.5rem;
+  left: 0.25rem;
+  z-index: 1;
+}
+
 @media (min-width: 768px) {
   .header {
     justify-content: space-between;
     flex-flow: row;
+    padding-right: 80px;
   }
 }

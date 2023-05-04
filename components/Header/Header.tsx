@@ -4,6 +4,8 @@ import Image from 'next/image.js'
 import Link from 'next/link.js'
 import { useRouter } from 'next/router.js'
 import { useContext, useEffect, useState } from 'react'
+import github from '../../public/github.svg'
+import linkedin from '../../public/linkedin.svg'
 import logo from '../../public/logo-gamepad.svg'
 import { LoginModal } from '../LoginModal/LoginModal'
 import styles from './Header.module.css'
@@ -113,8 +115,32 @@ export const Header = () => {
               </Link>
             </li>
           )}
+          <li>
+            <Link
+              href="https://www.linkedin.com/in/s%C3%A9bastien-mosagna-85a1a29/"
+              className={styles.linkedin_link}
+            >
+              <Image
+                src={linkedin}
+                className={styles.linkedin}
+                alt="link to linkedin page"
+                aria-label="link to linkedin page"
+              />
+            </Link>
+          </li>
         </ul>
       </div>
+      <Link
+        href="https://github.com/sebmosa/gamepad-ts-next"
+        className={styles.github_link}
+      >
+        <Image
+          src={github}
+          className={styles.github}
+          aria-label="link to github page"
+          alt="link to github page"
+        />
+      </Link>
       <LoginModal
         open={isOpen}
         onClose={closeModal}
