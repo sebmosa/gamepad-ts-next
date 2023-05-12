@@ -54,19 +54,10 @@
   text-overflow: ellipsis;
 }
 
-.github {
-  fill: currentColor !important;
-}
-
 .github_link {
-  fill: var(--jade-grey);
   cursor: pointer;
   position: absolute;
   right: 0;
-}
-
-.github_link:hover {
-  color: var(--white);
 }
 
 .linkedin {
