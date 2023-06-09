@@ -1,4 +1,4 @@
-import { fetchGameList } from '@/api/fetchGameList'
+import { fetchGameList } from '@/api-access/fetchGameList'
 import { useQuery } from '@tanstack/react-query'
 
 export const useGameListQuery = (

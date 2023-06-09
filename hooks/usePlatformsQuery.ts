@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { fetchPlatforms } from '../api/fetchPlatforms'
+import { fetchPlatforms } from '../api-access/fetchPlatforms'
 
 export const usePlatformsQuery = () => {
   return useQuery({

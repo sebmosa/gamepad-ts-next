@@ -1,4 +1,4 @@
-import { fetchGenres } from '@/api/fetchGenres'
+import { fetchGenres } from '@/api-access/fetchGenres'
 import { useQuery } from '@tanstack/react-query'
 
 export const useGenresQuery = () => {

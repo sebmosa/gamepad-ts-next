@@ -1,5 +1,5 @@
-import { fetchCollection } from '@/api/fetchCollection'
-import { removeFromCollection } from '@/api/removeFromCollection'
+import { fetchCollection } from '@/api-access/fetchCollection'
+import { removeFromCollection } from '@/api-access/removeFromCollection'
 import { Footer } from '@/components/Footer/Footer'
 import { GameCard } from '@/components/GameCard/GameCard'
 import { Header } from '@/components/Header/Header'

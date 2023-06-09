@@ -1,4 +1,4 @@
-import { fetchCollection } from '@/api/fetchCollection'
+import { fetchCollection } from '@/api-access/fetchCollection'
 import { useQuery } from '@tanstack/react-query'
 export const useGetCollection = (id: string) => {
   return useQuery({
