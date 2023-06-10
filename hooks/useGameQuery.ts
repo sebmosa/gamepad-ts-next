@@ -1,4 +1,4 @@
-import { fetchGame } from '@/api-access/fetchGame'
+import { fetchGame } from '@/backend-api/fetchGame'
 import { useQuery } from '@tanstack/react-query'
 export const useGameQuery = (id: string) => {
   return useQuery({
