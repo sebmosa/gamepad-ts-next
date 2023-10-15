@@ -8,7 +8,6 @@ import { GameCard } from '@/components/GameCard/GameCard'
 import { Header } from '@/components/Header/Header'
 import { Hero } from '@/components/Hero/Hero'
 import { Pagination } from '@/components/Pagination/Pagination'
-import { SearchNav } from '@/components/SearchNav/SearchNav'
 import {
   allGenresContext,
   allPlatformsContext,
@@ -212,7 +211,7 @@ const Home = ({
 
       <main className={styles.main}>
         <Hero totalGames={totalGames} />
-        <ErrorBoundary>
+        {/* <ErrorBoundary>
           <SearchNav
             placeholder="Search for a game..."
             search={search}
@@ -225,7 +224,7 @@ const Home = ({
             onChangeGenre={(value) => onChangeGenre(value)}
             onChangeSort={(value) => onChangeSort(value)}
           />
-        </ErrorBoundary>
+        </ErrorBoundary> */}
         <ErrorBoundary>
           <Pagination
             currentPage={page}

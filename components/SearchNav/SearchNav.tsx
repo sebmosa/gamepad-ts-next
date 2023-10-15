@@ -40,7 +40,7 @@ export const SearchNav = ({
   const platformsMemo = useMemo(() => platforms.data, [platforms.data])
   const genresMemo = useMemo(() => genres.data, [genres.data])
 
-  const allPlatforms = platformsMemo.map((platform: ISelectFilter) =>
+  const allPlatforms = platforms.data.map((platform: ISelectFilter) =>
     [platform.id].join()
   )
   const allGenres = genresMemo.map((genre: ISelectFilter) => [genre.id].join())
