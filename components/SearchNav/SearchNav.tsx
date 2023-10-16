@@ -1,8 +1,8 @@
 import { allGenresContext, allPlatformsContext } from '@/context/context'
-import { ISelectFilter } from '@/types/common'
 import { MouseEvent, useContext, useEffect, useMemo } from 'react'
 import { useGenresQuery } from '../../hooks/useGenresQuery'
 import { usePlatformsQuery } from '../../hooks/usePlatformsQuery'
+import { ISelectFilter } from '../../types/common'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { Select, SelectOption } from '../Select/Select'
 import styles from './SearchNav.module.css'
@@ -40,10 +40,13 @@ export const SearchNav = ({
   const platformsMemo = useMemo(() => platforms.data, [platforms.data])
   const genresMemo = useMemo(() => genres.data, [genres.data])
 
-  const allPlatforms = platforms.data.map((platform: ISelectFilter) =>
-    [platform.id].join()
+  const allPlatforms: ISelectFilter[] = platformsMemo.map(
+    (platform: ISelectFilter) => [platform.id].join()
   )
-  const allGenres = genresMemo.map((genre: ISelectFilter) => [genre.id].join())
+
+  const allGenres: ISelectFilter[] = genresMemo.map((genre: ISelectFilter) =>
+    [genre.id].join()
+  )
 
   useEffect(() => {
     setAllPLatformsCtx(allPlatforms)
