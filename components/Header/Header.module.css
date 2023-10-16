@@ -1,5 +1,7 @@
 .header {
-  margin: 0.75rem;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  margin-bottom: 0.75rem;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -76,6 +78,7 @@
     justify-content: space-between;
     flex-flow: row;
     padding-right: 80px;
+    margin-top: 0.75rem;
   }
 
   .header_username {
