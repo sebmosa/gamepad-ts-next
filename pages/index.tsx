@@ -23,8 +23,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router.js'
 import { ParsedUrlQuery } from 'querystring'
 import { MouseEvent, useContext, useEffect, useState } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import { fetchGameList } from '../backend-api/fetchGameList'
-import ErrorBoundary from '../components/ErrorBoundary'
 
 const first_page = 1
 const page_size = 20
@@ -206,13 +206,13 @@ const Home = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ErrorBoundary>
+      <ErrorBoundary fallback={<div>Header went wrong</div>}>
         <Header />
       </ErrorBoundary>
 
       <main className={styles.main}>
         <Hero totalGames={totalGames} />
-        <ErrorBoundary>
+        <ErrorBoundary fallback={<div>SearchNav went wrong</div>}>
           <SearchNav
             placeholder="Search for a game..."
             search={search}
@@ -226,7 +226,7 @@ const Home = ({
             onChangeSort={(value) => onChangeSort(value)}
           />
         </ErrorBoundary>
-        <ErrorBoundary>
+        <ErrorBoundary fallback={<div>Pagination went wrong</div>}>
           <Pagination
             currentPage={page}
             count={gameList?.count || 0}
@@ -236,7 +236,7 @@ const Home = ({
           />
         </ErrorBoundary>
         <div className={styles.list}>
-          <ErrorBoundary>
+          <ErrorBoundary fallback={<div>GameCard went wrong</div>}>
             {gameList?.results.map((game) => (
               <GameCard
                 key={game.id}

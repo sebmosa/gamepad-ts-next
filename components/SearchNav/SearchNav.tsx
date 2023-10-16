@@ -9,8 +9,8 @@ import styles from './SearchNav.module.css'
 export interface ISearchNav {
   placeholder: string
   search: string
-  platform: any
-  genre: any
+  platform: string
+  genre: string
   sort: string
   onInputChange: (value: string) => void
   onClick: (event: MouseEvent<HTMLButtonElement>) => void

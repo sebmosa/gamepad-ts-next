@@ -33,15 +33,18 @@ export const Header = () => {
     username: string | null
   ) => void
 
-  const setUser: SetUser = (token, id, username) => {
-    if (token) {
-      setCookie('userToken', token, { maxAge: 60 * 30 })
-      setCookie('userId', id, { maxAge: 60 * 30 })
-      setCookie('userName', username, { maxAge: 60 * 30 })
+  const setTokenCookie = (name: string, value: string | null) => {
+    if (value) {
+      setCookie(name, value, { maxAge: 60 * 30 })
     } else {
-      deleteCookie('userToken')
-      deleteCookie('userId')
+      deleteCookie(name)
     }
+  }
+
+  const setUser: SetUser = (token, id, username) => {
+    setTokenCookie('userToken', token)
+    setTokenCookie('userId', id)
+    setTokenCookie('userName', username)
     setToken(token)
   }
 

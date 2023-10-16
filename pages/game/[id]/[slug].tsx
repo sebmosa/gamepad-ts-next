@@ -13,7 +13,7 @@ const GamePage = () => {
 
   const gameId = typeof id === 'string' ? id : ''
 
-  const { data: game, isLoading, isFetching, isError } = useGameQuery(gameId)
+  const { data: game, isLoading, isError } = useGameQuery(gameId)
 
   if (isLoading) return <div>Loading...</div>
 
