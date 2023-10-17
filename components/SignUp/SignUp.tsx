@@ -49,8 +49,6 @@ export const SignUp = ({ setUser, setIsOpen }: ISignUp) => {
 
       const result = await response.json()
 
-      console.log('result signUp:', result)
-
       if (result.msg === 'Account existing') {
         setUserExist(true)
       }
@@ -85,7 +83,6 @@ export const SignUp = ({ setUser, setIsOpen }: ISignUp) => {
       }
 
       reset(data)
-      console.log('Success:', result)
     } catch (error) {
       console.error('Error:', error)
     }
