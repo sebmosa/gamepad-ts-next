@@ -1,12 +1,12 @@
 import { ReactNode, createContext, useState } from 'react'
 
 export type AllPlatforms = {
-  allPlatformsCtx: {}
-  setAllPLatformsCtx: (a: {}) => void
+  allPlatformsCtx: object
+  setAllPLatformsCtx: (a: object) => void
 }
 export type AllGenres = {
-  allGenresCtx: {}
-  setAllGenresCtx: (a: {}) => void
+  allGenresCtx: object
+  setAllGenresCtx: (a: object) => void
 }
 
 export type UserId = {
@@ -33,8 +33,8 @@ export interface IContext {
 }
 
 export const Context = ({ children }: IContext) => {
-  const [allPlatformsCtx, setAllPLatformsCtx] = useState<{}>({})
-  const [allGenresCtx, setAllGenresCtx] = useState<{}>({})
+  const [allPlatformsCtx, setAllPLatformsCtx] = useState<object>({})
+  const [allGenresCtx, setAllGenresCtx] = useState<object>({})
   const [userIdCtx, setUserIdCtx] = useState<string>('')
 
   return (

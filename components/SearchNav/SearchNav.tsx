@@ -37,16 +37,18 @@ export const SearchNav = ({
   const platforms = usePlatformsQuery()
   const genres = useGenresQuery()
 
-  const platformsMemo = useMemo(() => platforms.data, [platforms.data])
+  const platformsMemo: ISelectFilter[] = useMemo(
+    () => platforms.data,
+    [platforms.data]
+  )
+
   const genresMemo = useMemo(() => genres.data, [genres.data])
 
-  const allPlatforms: ISelectFilter[] = platformsMemo.map(
-    (platform: ISelectFilter) => [platform.id].join()
+  const allPlatforms = platformsMemo.map((platform: ISelectFilter) =>
+    [platform.id].join()
   )
 
-  const allGenres: ISelectFilter[] = genresMemo.map((genre: ISelectFilter) =>
-    [genre.id].join()
-  )
+  const allGenres = genresMemo.map((genre: ISelectFilter) => [genre.id].join())
 
   useEffect(() => {
     setAllPLatformsCtx(allPlatforms)
@@ -56,16 +58,19 @@ export const SearchNav = ({
     setAllGenresCtx(allGenres)
   }, [setAllGenresCtx])
 
+  const allPlatformsValue: string = allPlatforms.join(', ')
+
   const platformList: SelectOption[] = [
-    { name: 'All', value: allPlatforms },
+    { name: 'All', value: allPlatformsValue },
     ...platformsMemo.map((platform: ISelectFilter) => ({
       name: platform.name,
       value: platform.id,
     })),
   ]
+  const allGenresValue: string = allGenres.join(', ')
 
   const genreList: SelectOption[] = [
-    { name: 'All', value: allGenres },
+    { name: 'All', value: allGenresValue },
     ...genresMemo.map((genre: ISelectFilter) => ({
       name: genre.name,
       value: genre.id,

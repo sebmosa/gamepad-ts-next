@@ -23,7 +23,7 @@ export interface IGameList {
 }
 
 export interface ISelectFilter {
-  id: number
+  id: string
   name: string
   slug: string
 }
