@@ -42,13 +42,15 @@ export const SearchNav = ({
     [platforms.data]
   )
 
-  const genresMemo = useMemo(() => genres.data, [genres.data])
+  const genresMemo: ISelectFilter[] = useMemo(() => genres.data, [genres.data])
 
   const allPlatforms = Array.from(platformsMemo).map(
     (platform: ISelectFilter) => [platform.id].join()
   )
 
-  const allGenres = genresMemo.map((genre: ISelectFilter) => [genre.id].join())
+  const allGenres = Array.from(genresMemo).map((genre: ISelectFilter) =>
+    [genre.id].join()
+  )
 
   useEffect(() => {
     setAllPLatformsCtx(allPlatforms)
